@@ -8,7 +8,8 @@ services:
       context: ./saleor
       dockerfile: ./Dockerfile
       args:
-        STATIC_URL: '/static/'
+        - STATIC_URL='/static/'
+        - METADANE_DEPLOY_TOKEN=$METADANE_DEPLOY_TOKEN
     restart: unless-stopped
     networks:
       - saleor-backend-tier
@@ -81,7 +82,8 @@ services:
       context: ./saleor
       dockerfile: ./Dockerfile
       args:
-        STATIC_URL: '/static/'
+        - STATIC_URL='/static/'
+        - METADANE_DEPLOY_TOKEN=$METADANE_DEPLOY_TOKEN
     command: celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info
     restart: unless-stopped
     networks:
